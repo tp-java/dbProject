@@ -13,9 +13,9 @@
 class Settings {
   public static $db_config = array( 
     'HOST' => 'localhost',
-    'USER' => "media",
-    'PASS' => "1234",
-    'DB_NAME' => "media",
+    'USER' => "root",
+    'PASS' => "",
+    'DB_NAME' => "tp_project",
     'PORT' => 3306,
   );  
 }
