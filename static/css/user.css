@@ -31,3 +31,14 @@
 .call__body:first-child{
 	padding-bottom: 10px;
 }
+.sidebar-container{
+	padding-top: 35px;
+	position: absolute;
+	width: inherit;
+
+}
+.mysidebar{
+	position: absolute;
+	right: 0px;
+	width: 200px;
+}
