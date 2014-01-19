@@ -12,7 +12,7 @@
  
 
 
-	<div class="modal fade-in overlay" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 70%;left: 450px">
+	<div class="modal fade-in hide overlay" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 70%;left: 450px">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	    <h3 id="myModalLabel" class="title">Звонок</h3>
@@ -110,7 +110,7 @@
 						<td class="table__cell table__cell_address">Адрес</td>
 						<td class="table__cell table__cell_comment">Комментарий</td>
 						<td class="table__cell table__cell_status">
-							<button class="btn btn-info">не обзвонен</button>
+							<button class="btn btn-primary">позвонить</button>
 						</td>							
 					</tr>
 					<tr>
@@ -120,7 +120,7 @@
 						<td class="table__cell table__cell_address">Адрес</td>
 						<td class="table__cell table__cell_comment">Комментарий</td>
 						<td class="table__cell table__cell_status">
-							<button class="btn btn-primary">обзвонен</button>
+							<button class="btn btn-danger">выслать&nbsp;offer</button>
 						</td>						
 					</tr>
 					<tr>
@@ -130,7 +130,7 @@
 						<td class="table__cell table__cell_address">Адрес</td>
 						<td class="table__cell table__cell_comment">Комментарий</td>
 						<td class="table__cell table__cell_status">
-							<button class="btn btn-success">закрыт</button>
+							<button class="btn btn-success">одобрен&nbsp;offer</button>
 						</td>					
 					</tr>
 					<tr>
@@ -140,9 +140,39 @@
 						<td class="table__cell table__cell_address">Адрес</td>
 						<td class="table__cell table__cell_comment">Комментарий</td>
 						<td class="table__cell table__cell_status">
-							<button class="btn btn-warning">ожидание</button>
+							<button class="btn btn-warning">проходит&nbsp;сделка</button>
 						</td>					
 					</tr>
+					<tr>
+						<td class="table__cell table__cell_fio">Фамилия</td>
+						<td class="table__cell table__cell_fio">Имя</td>
+						<td class="table__cell table__cell_fio">Отчество</td>
+						<td class="table__cell table__cell_address">Адрес</td>
+						<td class="table__cell table__cell_comment">Комментарий</td>
+						<td class="table__cell table__cell_status">
+							<button class="btn btn-warning">перечисление&nbsp;$</button>
+						</td>					
+					</tr>
+					<tr>
+						<td class="table__cell table__cell_fio">Фамилия</td>
+						<td class="table__cell table__cell_fio">Имя</td>
+						<td class="table__cell table__cell_fio">Отчество</td>
+						<td class="table__cell table__cell_address">Адрес</td>
+						<td class="table__cell table__cell_comment">Комментарий</td>
+						<td class="table__cell table__cell_status">
+							<button class="btn btn-info">успешно&nbsp;закрыт</button>
+						</td>					
+					</tr>
+					<tr>
+						<td class="table__cell table__cell_fio">Фамилия</td>
+						<td class="table__cell table__cell_fio">Имя</td>
+						<td class="table__cell table__cell_fio">Отчество</td>
+						<td class="table__cell table__cell_address">Адрес</td>
+						<td class="table__cell table__cell_comment">Комментарий</td>
+						<td class="table__cell table__cell_status">
+							<button class="btn btn-inverse">облом</button>
+						</td>					
+					</tr>	
 				</tbody>
 			</table>
 		</div>
