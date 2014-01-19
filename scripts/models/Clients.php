@@ -15,6 +15,8 @@ class Clients {
   private $status;
   private $employer;
   
+  private $calls;
+  private $offers;
   private $tel_numbers;
   
   private $initialized = false;
@@ -71,6 +73,24 @@ class Clients {
       return false;
     return $this->employer;
   }
+  //TODO:
+  public function getCalls() {
+    if (!$this->check_init())
+      return false;
+    if (!$this->calls) {
+      $this->getCallsFromDb();
+    }
+    return $this->tel_numbers;
+  }
+  
+  public function getOffers() {
+    if (!$this->check_init())
+      return false;
+    if (!$this->offers) {
+      $this->getOffersFromDb();
+    }
+    return $this->tel_numbers;
+  }
   
   public function getTelNumbers() {
     if (!$this->check_init())
@@ -80,7 +100,7 @@ class Clients {
   
   public function loadClientById($id) {
     try {
-      $result = $this->conn->query("SELECT * FROM Clients WHERE idClients = '" . $id . "'");
+      $result = $this->conn->query("SELECT * FROM clients WHERE idClients = '" . $id . "'");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -96,37 +116,38 @@ class Clients {
   
   public static function getClientsByUid($uid) {
     try {
-      $result = $this->conn->query("SELECT Clients.* FROM Clients WHERE employer = '" . $uid . "'");
+      require_once dirname(dirname(__FILE__)) . '/db_singleton/DBprovider.php';
+      $result = DBProvider::getInstance()->query("SELECT clients.* FROM clients WHERE employer = '" . $uid . "'");
     } catch (Exception $e) {
-      $this->error = $e->getMessage();
       return false;
     }
     if ($result) {
       $clients_array = array();
       foreach ($result as $client) {
-        array_push($clients_array, $this->getClientByResultSet($client));
+        $tmp = Clients::getClientByResultSet($client);
+        array_push($clients_array, $tmp);
       }
       return $clients_array;
     } else {
-      $this->error = 'Wrong UID, fetching clients failed';
       return false;
     }
        
   }
   
-  private function getClientByResultSet($result) {
+  private static function getClientByResultSet($result) {
     $client = new Clients();
-    $client->assignFieldsFromResult($result);
+    $client->assignFieldsFromResult(array($result));
     return $client;
   }
   
   private function assignFieldsFromResult($result) {
-    $this->id = $result[0]->id;
+    $this->id = $result[0]->idClients;
     $this->f_name = $result[0]->f_name?$result[0]->f_name:'';
     $this->s_name = $result[0]->s_name?$result[0]->s_name:'';
     $this->l_name = $result[0]->l_name?$result[0]->l_name:'';
     $this->address = $result[0]->address?$result[0]->address:'';
     $this->comment = $result[0]->comment?$result[0]->comment:'';
+    $this->status = $result[0]->status?$result[0]->status:'';
     $this->employer = $result[0]->employer?$result[0]->employer:'';
     $this->tel_numbers = ($numbs = $this->getTelNumbersFromDb())?$numbs:array();
     
@@ -135,7 +156,7 @@ class Clients {
   
   private function getTelNumbersFromDb() {
     try {
-      $result = $this->conn->query("SELECT * FROM Tel_numbers WHERE idTel_numbers = '" . $this->id . "'");
+      $result = $this->conn->query("SELECT * FROM tel_numbers WHERE client = '" . $this->id . "'");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -144,6 +165,36 @@ class Clients {
       return $result;
     } else {
       $this->error = 'Wrong clientId, fetching phone numbers failed';
+      return false;
+    }
+  }
+  
+  private function getOffersFromDb() {
+    try {
+      $result = $this->conn->query("SELECT * FROM offers WHERE clientID = '" . $this->id . "'");
+    } catch (Exception $e) {
+      $this->error = $e->getMessage();
+      return false;
+    }
+    if ($result) {
+      return $result;
+    } else {
+      $this->error = 'Something went wrong with offers';
+      return false;
+    }
+  }
+  
+  private function getCallsFromDb() {
+    try {
+      $result = $this->conn->query("SELECT * FROM calls WHERE client = '" . $this->id . "'");
+    } catch (Exception $e) {
+      $this->error = $e->getMessage();
+      return false;
+    }
+    if ($result) {
+      return $result;
+    } else {
+      $this->error = 'Something went wrong with calls';
       return false;
     }
   }

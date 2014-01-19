@@ -15,7 +15,7 @@ class Settings {
     'HOST' => 'localhost',
     'USER' => "root",
     'PASS' => "",
-    'DB_NAME' => "tp_project",
+    'DB_NAME' => "mydb",
     'PORT' => 3306,
   );  
 }

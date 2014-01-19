@@ -1,6 +1,6 @@
 <?php
-define (MANAGER, 1);
-define (EMPLOYER, 0);
+define ('MANAGER', 'manager');
+define ('EMPLOYER', 'employer');
 /**
  * Description of Users
  *
@@ -106,7 +106,7 @@ class Users {
   public function loadUserByLoginPass($username, $password) {
     //Здесь тримы, prepare и прочая безопасная лабуда
     try {
-      $result = $this->conn->query("SELECT * FROM Users WHERE username = '". $username ."' AND password = '" . $password . "'");
+      $result = $this->conn->query("SELECT * FROM users WHERE username = '". $username ."' AND password = '" . $password . "'");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -131,7 +131,7 @@ class Users {
   public function loadUserBySessId($sess_id) {
     try {
       //TODO:
-      $result = $this->conn->query("SELECT Users.* FROM Sessions LEFT JOIN users ON userID=users.idUsers WHERE cookie = '". $sess_id ."'");
+      $result = $this->conn->query("SELECT users.* FROM sessions LEFT JOIN users ON userID=users.idUsers WHERE cookie = '". $sess_id ."'");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -155,7 +155,7 @@ class Users {
     //TODO:
     try {
       $hash = md5($this->id . time());
-      $this->conn->query("INSERT INTO Sessions (userID, cookie) VALUES (" . $this->id . ", '" . $hash . "')");
+      $this->conn->query("INSERT INTO sessions (userID, cookie) VALUES (" . $this->id . ", '" . $hash . "')");
       return $hash;
     } catch (Exception $e) {
       $this->error = $e->getMessage();
@@ -170,9 +170,9 @@ class Users {
     return $this->initialized;
   }
   
-  private function getUsersByResultSet($result) {
+  private static function getUsersByResultSet($result) {
     $user = new Users();
-    $user->assignFieldsFromResult($result);
+    $user->assignFieldsFromResult(array($result));
     return $user;
   }
   
@@ -190,20 +190,19 @@ class Users {
   
   public static function getAllUsersByManager($uid) {
     try {
-      $result = $this->conn->query("SELECT * FROM Users WHERE bossID = '". $uid ."'");
+      require_once dirname(dirname(__FILE__)) . '/db_singleton/DBprovider.php';
+      $result = DBProvider::getInstance()->query("SELECT * FROM users WHERE bossID = '". $uid ."'");
     } catch (Exception $e) {
-      $this->error = $e->getMessage();
       return false;
     }
      if ($result) {
       $users_array = array();
       foreach ($result as $user) {
-        array_push($users_array, $this->getUsersByResultSet($user));
+        array_push($users_array, Users::getUsersByResultSet($user));
       }
       return $users_array;
       
     } else {
-      $this->error = 'Wrong manager id';
       return false;
     }
   }

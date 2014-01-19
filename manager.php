@@ -5,7 +5,7 @@ if (!isset($_SESSION['uid']) || !isset($_SESSION['group'])) {
   exit();
 }
 //TODO: Убрать хардкод
-if ($_SESSION['group'] == 0) {
+if ($_SESSION['group'] == "employer") {
   header("Location: /user.php");
   exit();
 }

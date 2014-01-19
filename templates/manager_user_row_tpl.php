@@ -1,1 +1,1 @@
-<li><a href="<?php echo $user->id ?>"><i class="icon-chevron-right"></i><?php echo $user->f_name; echo(' '); echo $user->l_name;?></a></li>
+<li><a href="<?php echo $user->getId() ?>"><i class="icon-chevron-right"></i><?php echo $user->getFirstName(); echo(' '); echo $user->getLastName();?></a></li>

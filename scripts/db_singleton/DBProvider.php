@@ -10,6 +10,8 @@ class DBProvider {
     require_once('Settings.php');
     $settings = Settings::$db_config;
     $this->conn = new mysqli($settings['HOST'], $settings['USER'], $settings['PASS'], $settings['DB_NAME'], $settings['PORT']);
+    $this->conn->set_charset("utf8");
+    
      if(mysqli_connect_errno()) {
        throw new Exception('Ошибка соединения: '.mysqli_connect_error());
      }
