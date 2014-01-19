@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 function custom_redirect() {
   //TODO: убрать хардкод
   if ($_SESSION['group'] == 0)
-    header("Location: /clients.php");
+    header("Location: /user.php");
   if ($_SESSION['group'] == 1)
     header("Location: /manager.php");
+  exit();
 }
 ?>

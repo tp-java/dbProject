@@ -102,78 +102,11 @@
 						<th class="table__cell table__cell_status">Статус</th>		
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-primary">позвонить</button>
-						</td>							
-					</tr>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-danger">выслать&nbsp;offer</button>
-						</td>						
-					</tr>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-success">одобрен&nbsp;offer</button>
-						</td>					
-					</tr>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-warning">проходит&nbsp;сделка</button>
-						</td>					
-					</tr>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-warning">перечисление&nbsp;$</button>
-						</td>					
-					</tr>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-info">успешно&nbsp;закрыт</button>
-						</td>					
-					</tr>
-					<tr>
-						<td class="table__cell table__cell_fio">Фамилия</td>
-						<td class="table__cell table__cell_fio">Имя</td>
-						<td class="table__cell table__cell_fio">Отчество</td>
-						<td class="table__cell table__cell_address">Адрес</td>
-						<td class="table__cell table__cell_comment">Комментарий</td>
-						<td class="table__cell table__cell_status">
-							<button class="btn btn-inverse">облом</button>
-						</td>					
-					</tr>	
-				</tbody>
+                                <tbody>
+				<?php
+                                $clients_template
+                                ?>
+                                </tbody>
 			</table>
 		</div>
 	</div>
@@ -188,3 +121,4 @@
     <script src="../static/js/user.js"></script>
   </body>
 </html>
+					
