@@ -1,4 +1,33 @@
-.page__title{
+.title{
 	text-align: center;
 	margin-bottom: 30px;
+}
+.table__cell{
+	vertical-align: middle !important;
+}
+.table__cell_fio{
+	width: 100px;
+}
+.table__cell_address{
+	width: 120px;
+}
+.table__cell_comment{
+	width: 180px;
+}
+.table__cell_status{
+	width: 100px;
+}
+.overlay{
+	width: 70% !important;
+	left: 450px !important;
+}
+.value{
+	padding-top: 5px;
+}
+.control-group{
+	margin-bottom: 0px !important;
+}
+
+.call__body:first-child{
+	padding-bottom: 10px;
 }
