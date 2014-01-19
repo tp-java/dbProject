@@ -16,6 +16,10 @@ class Users {
   private $l_name;
   private $role;
   private $comment;
+  private $boss_id;
+    
+  private $employees;
+  private $clients;
   
   public function __construct() {
     require_once dirname(dirname(__FILE__)) . '/db_singleton/DBprovider.php';
@@ -64,6 +68,24 @@ class Users {
     return $this->comment;
   }
   
+  public function getBossId() {
+    if (!$this->check_init())
+      return false;
+    return $this->boss_id;
+  }
+  
+  public function getClients() {
+    if (!$this->check_init())
+      return false;
+    if (!$this->clients) {
+      require_once('Clients.php');
+      $this->clients = Clients::getClientsByUid($uid);
+    }
+    return $this->clients;
+  }
+  
+  
+    
   public function updateUser() {
     //TODO:
   }
@@ -75,7 +97,7 @@ class Users {
   public function loadUserByLoginPass($username, $password) {
     //Здесь тримы, prepare и прочая безопасная лабуда
     try {
-      $result = $this->conn->query("SELECT * FROM users WHERE username = '". $username ."' AND password = '" . $password . "'");
+      $result = $this->conn->query("SELECT * FROM Users WHERE username = '". $username ."' AND password = '" . $password . "'");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -100,7 +122,7 @@ class Users {
   public function loadUserBySessId($sess_id) {
     try {
       //TODO:
-      $result = $this->conn->query("SELECT users.* FROM sessions LEFT JOIN users ON uid=users.id WHERE hash = '". $sess_id ."'");
+      $result = $this->conn->query("SELECT Users.* FROM Sessions LEFT JOIN users ON userID=users.idUsers WHERE cookie = '". $sess_id ."'");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -124,7 +146,7 @@ class Users {
     //TODO:
     try {
       $hash = md5($this->id . time());
-      $this->conn->query("INSERT INTO sessions (uid, hash) VALUES (" . $this->id . ", '" . $hash . "')");
+      $this->conn->query("INSERT INTO Sessions (userID, cookie) VALUES (" . $this->id . ", '" . $hash . "')");
       return $hash;
     } catch (Exception $e) {
       $this->error = $e->getMessage();
@@ -140,13 +162,14 @@ class Users {
   }
   
   private function assignFieldsFromResult($result) {
-    $this->id = $result[0]->id;
+    $this->id = $result[0]->idUsers;
     $this->username = $result[0]->username;
     $this->f_name = $result[0]->f_name?$result[0]->f_name:'';
     $this->s_name = $result[0]->s_name?$result[0]->s_name:'';
     $this->l_name = $result[0]->l_name?$result[0]->l_name:'';
     $this->role = $result[0]->role?$result[0]->role:'';
     $this->comment = $result[0]->comment?$result[0]->comment:'';
+    $this->boss_id = $result[0]->bossID?$result[0]->bossID:'';
     $this->initialized = true;
   }
   
