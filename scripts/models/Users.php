@@ -1,4 +1,6 @@
 <?php
+define (MANAGER, 1);
+define (EMPLOYER, 0);
 /**
  * Description of Users
  *
@@ -18,7 +20,7 @@ class Users {
   private $comment;
   private $boss_id;
     
-  private $employees;
+  private $employers;
   private $clients;
   
   public function __construct() {
@@ -69,7 +71,7 @@ class Users {
   }
   
   public function getBossId() {
-    if (!$this->check_init())
+    if (!$this->check_init() || $this->role == MANAGER)
       return false;
     return $this->boss_id;
   }
@@ -84,7 +86,14 @@ class Users {
     return $this->clients;
   }
   
-  
+  public function getEmployers() {
+    if (!$this->check_init() || $this->role == EMPLOYER)
+      return false;
+    if ($employers = getAllUsersByManager($this->id)) {
+      return $this->employers;
+    }
+    return false;
+  }
     
   public function updateUser() {
     //TODO:
@@ -161,6 +170,12 @@ class Users {
     return $this->initialized;
   }
   
+  private function getUsersByResultSet($result) {
+    $user = new Users();
+    $user->assignFieldsFromResult($result);
+    return $user;
+  }
+  
   private function assignFieldsFromResult($result) {
     $this->id = $result[0]->idUsers;
     $this->username = $result[0]->username;
@@ -173,8 +188,24 @@ class Users {
     $this->initialized = true;
   }
   
-  public static function getAllUsersByManager($manager) {
-    //TODO:
+  public static function getAllUsersByManager($uid) {
+    try {
+      $result = $this->conn->query("SELECT * FROM Users WHERE bossID = '". $uid ."'");
+    } catch (Exception $e) {
+      $this->error = $e->getMessage();
+      return false;
+    }
+     if ($result) {
+      $users_array = array();
+      foreach ($result as $user) {
+        array_push($users_array, $this->getUsersByResultSet($user));
+      }
+      return $users_array;
+      
+    } else {
+      $this->error = 'Wrong manager id';
+      return false;
+    }
   }
 }
 

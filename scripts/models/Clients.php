@@ -104,7 +104,7 @@ class Clients {
     if ($result) {
       $clients_array = array();
       foreach ($result as $client) {
-        array_push($clients_array, $this->getClientBuyResultSet($client));
+        array_push($clients_array, $this->getClientByResultSet($client));
       }
       return $clients_array;
     } else {
@@ -114,7 +114,7 @@ class Clients {
        
   }
   
-  private function getClientBuyResultSet($result) {
+  private function getClientByResultSet($result) {
     $client = new Clients();
     $client->assignFieldsFromResult($result);
     return $client;
