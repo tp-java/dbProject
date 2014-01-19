@@ -102,20 +102,16 @@
 						<th class="table__cell table__cell_status">Статус</th>		
 					</tr>
 				</thead>
-                                <tbody>
-				<?php
-                                $clients_template
-                                ?>
-                                </tbody>
+          <tbody>
+          <?php
+            foreach ($clients as $client) {
+              include('user_client_row_tpl.php');              
+            }
+          ?>
+          </tbody>
 			</table>
 		</div>
 	</div>
-	
-
-
-
-
-
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/user.js"></script>
