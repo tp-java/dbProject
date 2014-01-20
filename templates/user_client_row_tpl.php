@@ -1,4 +1,4 @@
-<tr>
+<tr user-id="<?php echo $client->getId();?>">
         <td class="table__cell table__cell_fio"><?php echo $client->getLastName() ?></td>
         <td class="table__cell table__cell_fio"><?php echo $client->getFirstName() ?></td>
         <td class="table__cell table__cell_fio"><?php echo $client->getSecondName() ?></td>

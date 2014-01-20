@@ -17,6 +17,36 @@
 .table__cell_status{
 	width: 100px;
 }
+
+.table__cell_off-type{
+	width: 200px;
+}
+.table__cell_off-comment{
+
+}
+.table__cell_off-result{
+	width: 50px;
+}
+.table__cell_off-price{
+	width: 50px;
+}
+
+.table__cell_surname{
+	width: 85px;
+}
+.table__cell_result{
+	width: 90px;
+}
+.table__cell_duration{
+	width: 100px;
+}
+.table__cell_comment{
+	
+}
+.table__cell_date{
+	width: 100px;
+}
+
 .overlay{
 	width: 70% !important;
 	left: 450px !important;
@@ -41,4 +71,16 @@
 	position: absolute;
 	right: 0px;
 	width: 200px;
+}
+.modal__table-container{
+	padding:0 20px 0;
+	margin-top: 30px !important;
+	width: 80%;
+	margin: 0 auto;
+	border: 1px solid #cccccc;
+	border-radius: 10px;
+}
+.modal-table__title{
+	text-align: center;
+	text-decoration: underline;
 }

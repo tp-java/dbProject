@@ -6,6 +6,7 @@ session_start();
 if (isset($_COOKIE['callphpsession'])) {
   if ($param = check_cookie_sess($_COOKIE['callphpsession'])) {
     $_SESSION['uid'] = $param['uid'];
+    $_SESSION['initials'] = $param['initials'];
     $_SESSION['group'] = $param['group'];
     custom_redirect();
   }
@@ -16,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $param = check_password($_POST['username'], $_POST['password']);
     setcookie('callphpsession', $param['cookie'] , time() + 36000);
     $_SESSION['uid'] = $param['uid'];
+    $_SESSION['initials'] = $param['initials'];
     $_SESSION['group'] = $param['group'];
     custom_redirect();
   } else {

@@ -78,18 +78,18 @@ class Clients {
     if (!$this->check_init())
       return false;
     if (!$this->calls) {
-      $this->getCallsFromDb();
+      $this->calls = $this->getCallsFromDb();
     }
-    return $this->tel_numbers;
+    return $this->calls;
   }
   
   public function getOffers() {
     if (!$this->check_init())
       return false;
     if (!$this->offers) {
-      $this->getOffersFromDb();
+      $this->offers = $this->getOffersFromDb();
     }
-    return $this->tel_numbers;
+    return $this->offers;
   }
   
   public function getTelNumbers() {
@@ -171,7 +171,7 @@ class Clients {
   
   private function getOffersFromDb() {
     try {
-      $result = $this->conn->query("SELECT * FROM offers WHERE clientID = '" . $this->id . "'");
+      $result = $this->conn->query("SELECT offers.*, offers_types.type as title FROM offers INNER JOIN offers_types ON offers.type = offers_types.idOffers_types WHERE clientID = " . $this->id);
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
@@ -186,7 +186,7 @@ class Clients {
   
   private function getCallsFromDb() {
     try {
-      $result = $this->conn->query("SELECT * FROM calls WHERE client = '" . $this->id . "'");
+      $result = $this->conn->query("SELECT users.f_name as employer, calls.result as call_result, duration, calls.comment as call_comment, time FROM calls INNER JOIN clients ON client=idClients INNER JOIN users ON employer = idUsers WHERE client = " . $this->id . "");
     } catch (Exception $e) {
       $this->error = $e->getMessage();
       return false;
